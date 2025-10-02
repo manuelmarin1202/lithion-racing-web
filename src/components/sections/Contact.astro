@@ -1,0 +1,304 @@
+---
+const contactInfo = [
+  {
+    icon: "📧",
+    title: "Email",
+    details: "team@formulasae.edu"
+  },
+  {
+    icon: "📱",
+    title: "Teléfono",
+    details: "+1 (555) 123-4567"
+  },
+  {
+    icon: "📍",
+    title: "Ubicación",
+    details: "Universidad de Ingeniería\nCampus Principal, Edificio A"
+  }
+];
+
+const socialLinks = [
+  { icon: "📘", url: "#", name: "Facebook" },
+  { icon: "📷", url: "#", name: "Instagram" },
+  { icon: "🐦", url: "#", name: "Twitter" },
+  { icon: "💼", url: "#", name: "LinkedIn" }
+];
+---
+
+<section id="contacto" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Contacto</h2>
+      <p class="section-subtitle">Ponte en contacto con nosotros</p>
+    </div>
+    <div class="contact-content">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Información de Contacto</h3>
+          {contactInfo.map(info => (
+            <div class="contact-item">
+              <span class="contact-icon">{info.icon}</span>
+              <div>
+                <h4>{info.title}</h4>
+                <p>{info.details}</p>
+              </div>
+            </div>
+          ))}
+          <div class="social-links">
+            {socialLinks.map(link => (
+              <a href={link.url} class="social-link" aria-label={link.name}>
+                {link.icon}
+              </a>
+            ))}
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>Envíanos un Mensaje</h3>
+          <form id="contactForm">
+            <div class="form-group">
+              <input type="text" id="name" name="name" placeholder="Nombre completo" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="subject" name="subject" placeholder="Asunto" required>
+            </div>
+            <div class="form-group">
+              <textarea id="message" name="message" placeholder="Mensaje" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Enviar Mensaje</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+  }
+
+  .contact-info h3 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-icon {
+    font-size: 1.5rem;
+    margin-top: 0.2rem;
+  }
+
+  .contact-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .contact-item p {
+    margin: 0;
+    color: var(--text-light);
+    white-space: pre-line;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 50%;
+    transition: var(--transition);
+    font-size: 1.5rem;
+  }
+
+  .social-link:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-3px);
+  }
+
+  .contact-form h3 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--accent-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+    font-family: inherit;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(1, 30, 84, 0.1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-align: center;
+    background: none;
+    font-family: inherit;
+  }
+
+  .btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+  }
+
+  .btn-primary:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow);
+  }
+
+  .btn-full {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .contact-item {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.5rem;
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+    }
+
+    .social-links {
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      font-size: 1.3rem;
+    }
+  }
+</style>
+
+<script>
+  // Form handling
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+
+    form?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      // Show loading state
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalText = submitButton?.textContent;
+      if (submitButton) {
+        submitButton.textContent = 'Enviando...';
+        submitButton.disabled = true;
+      }
+
+      try {
+        // Simulate API call - replace with real endpoint
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Show success message
+        showMessage('success', '¡Mensaje enviado correctamente!');
+        form.reset();
+
+      } catch (error) {
+        showMessage('error', 'Error al enviar el mensaje. Inténtelo de nuevo.');
+      } finally {
+        // Reset button state
+        if (submitButton && originalText) {
+          submitButton.textContent = originalText;
+          submitButton.disabled = false;
+        }
+      }
+    });
+  });
+
+  function showMessage(type: string, message: string) {
+    // Remove existing messages
+    const existingMessages = document.querySelectorAll('.success-message, .error-message');
+    existingMessages.forEach(msg => msg.remove());
+
+    // Create new message
+    const messageElement = document.createElement('div');
+    messageElement.className = `${type}-message`;
+    messageElement.textContent = message;
+    messageElement.style.cssText = `
+      background-color: ${type === 'success' ? '#d4edda' : '#f8d7da'};
+      border: 1px solid ${type === 'success' ? '#c3e6cb' : '#f5c6cb'};
+      color: ${type === 'success' ? '#155724' : '#721c24'};
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1rem 0;
+      display: block;
+    `;
+
+    // Insert after contact form
+    const contactForm = document.querySelector('#contactForm');
+    if (contactForm?.parentNode) {
+      contactForm.parentNode.insertBefore(messageElement, contactForm.nextSibling);
+
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        messageElement.style.opacity = '0';
+        setTimeout(() => messageElement.remove(), 300);
+      }, 5000);
+    }
+  }
+</script>

@@ -1,0 +1,90 @@
+---
+const features = [
+  {
+    icon: "⚡",
+    title: "Tecnología Eléctrica",
+    description: "Desarrollamos sistemas de propulsión eléctrica de alta eficiencia y rendimiento para competiciones Formula SAE."
+  },
+  {
+    icon: "🏆",
+    title: "Competición",
+    description: "Participamos en las competiciones más prestigiosas de Formula SAE a nivel nacional e internacional."
+  },
+  {
+    icon: "🔧",
+    title: "Ingeniería",
+    description: "Aplicamos conocimientos multidisciplinarios en mecánica, eléctrica, aerodinámica y materiales."
+  }
+];
+---
+
+<section id="acerca" class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Acerca de Nosotros</h2>
+      <p class="section-subtitle">Pasión por la ingeniería y la competición</p>
+    </div>
+    <div class="about-content">
+      <div class="about-grid">
+        {features.map(feature => (
+          <div class="about-card">
+            <div class="card-icon">{feature.icon}</div>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .about-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid var(--accent-color);
+  }
+
+  .about-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .card-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .about-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .about-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+
+  @media screen and (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .about-card {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

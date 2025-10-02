@@ -1,0 +1,171 @@
+---
+const sponsors = [
+  {
+    name: "Sponsor Principal",
+    description: "Empresa líder en tecnología automotriz",
+    logo: "🏢"
+  },
+  {
+    name: "Componentes",
+    description: "Proveedor de componentes especializados",
+    logo: "⚙️"
+  },
+  {
+    name: "Baterías",
+    description: "Sistemas de energía eléctrica",
+    logo: "🔋"
+  },
+  {
+    name: "Herramientas",
+    description: "Equipamiento y herramientas de precisión",
+    logo: "🛠️"
+  }
+];
+---
+
+<section id="sponsors" class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Nuestros Sponsors</h2>
+      <p class="section-subtitle">Empresas que confían en nuestro proyecto</p>
+    </div>
+    <div class="sponsors-content">
+      <div class="sponsors-grid">
+        {sponsors.map(sponsor => (
+          <div class="sponsor-card">
+            <div class="sponsor-logo">{sponsor.logo}</div>
+            <h3>{sponsor.name}</h3>
+            <p>{sponsor.description}</p>
+          </div>
+        ))}
+      </div>
+      <div class="sponsor-cta">
+        <h3>¿Quieres ser nuestro sponsor?</h3>
+        <p>Únete a nuestro proyecto y forma parte de la innovación en ingeniería automotriz</p>
+        <a href="#contacto" class="btn btn-primary">Contáctanos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sponsors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .sponsor-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid var(--accent-color);
+  }
+
+  .sponsor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .sponsor-logo {
+    width: 80px;
+    height: 80px;
+    background: var(--accent-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--primary-color);
+    font-size: 2rem;
+    transition: var(--transition);
+  }
+
+  .sponsor-card:hover .sponsor-logo {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: scale(1.05);
+  }
+
+  .sponsor-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .sponsor-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+
+  .sponsor-cta {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color), #034a9a);
+    color: var(--white);
+    border-radius: var(--border-radius);
+  }
+
+  .sponsor-cta h3 {
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .sponsor-cta p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .btn-primary {
+    background: var(--white);
+    color: var(--primary-color);
+    border-color: var(--white);
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--white);
+    border-color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  @media screen and (max-width: 768px) {
+    .sponsors-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .sponsor-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .sponsor-logo {
+      width: 70px;
+      height: 70px;
+      font-size: 1.8rem;
+    }
+
+    .sponsor-cta {
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+  }
+</style>

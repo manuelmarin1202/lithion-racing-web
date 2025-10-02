@@ -1,0 +1,126 @@
+---
+const teamMembers = [
+  {
+    name: "Team Leader",
+    role: "Líder del Proyecto",
+    description: "Coordina todas las actividades del equipo y gestiona las relaciones con sponsors.",
+    avatar: "👨‍🔧"
+  },
+  {
+    name: "Powertrain Engineer",
+    role: "Ingeniera de Propulsión",
+    description: "Diseña y optimiza el sistema de propulsión eléctrica del vehículo.",
+    avatar: "👩‍💻"
+  },
+  {
+    name: "Chassis Engineer",
+    role: "Ingeniero de Chasis",
+    description: "Responsable del diseño estructural y la seguridad del vehículo.",
+    avatar: "👨‍🔬"
+  },
+  {
+    name: "Aerodynamics Engineer",
+    role: "Ingeniera Aerodinámica",
+    description: "Optimiza el flujo de aire y la eficiencia aerodinámica del vehículo.",
+    avatar: "👩‍🎨"
+  }
+];
+---
+
+<section id="equipo" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Nuestro Equipo</h2>
+      <p class="section-subtitle">Estudiantes apasionados por la innovación</p>
+    </div>
+    <div class="team-content">
+      <div class="team-grid">
+        {teamMembers.map(member => (
+          <div class="team-card">
+            <div class="member-photo">{member.avatar}</div>
+            <h3>{member.name}</h3>
+            <p class="member-role">{member.role}</p>
+            <p class="member-description">{member.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .team-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid var(--accent-color);
+  }
+
+  .team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .member-photo {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), #034a9a);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--white);
+    font-size: 2rem;
+    transition: var(--transition);
+  }
+
+  .team-card:hover .member-photo {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(1, 30, 84, 0.2);
+  }
+
+  .team-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .member-role {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .member-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+
+  @media screen and (max-width: 768px) {
+    .team-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .team-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .member-photo {
+      width: 70px;
+      height: 70px;
+      font-size: 1.8rem;
+    }
+  }
+</style>
