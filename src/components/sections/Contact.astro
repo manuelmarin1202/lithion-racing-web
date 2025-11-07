@@ -3,38 +3,38 @@ const contactInfo = [
   {
     icon: "📧",
     title: "Email",
-    details: "team@formulasae.edu"
+    details: "lithion.racing.pucp@gmail.com"
   },
   {
-    icon: "📱",
-    title: "Teléfono",
-    details: "+1 (555) 123-4567"
+
+    icon: "📷",
+    title: "Instagram",
+    details: "@lithion.racing"
   },
   {
-    icon: "📍",
-    title: "Ubicación",
-    details: "Universidad de Ingeniería\nCampus Principal, Edificio A"
+    icon: "💼",
+    title: "LinkedIn",
+    details: "Lithion Racing"
   }
 ];
 
 const socialLinks = [
-  { icon: "📘", url: "#", name: "Facebook" },
-  { icon: "📷", url: "#", name: "Instagram" },
-  { icon: "🐦", url: "#", name: "Twitter" },
-  { icon: "💼", url: "#", name: "LinkedIn" }
+  { icon: "📷", url: "https://www.instagram.com/lithion.racing/", name: "Instagram" },
+  { icon: "💼", url: "https://www.linkedin.com/company/lithion-racing/", name: "LinkedIn" },
+  { icon: "📍", url: "https://www.google.com/maps/place/Pontificia+Universidad+Cat%C3%B3lica+del+Per%C3%BA/@-12.0690919,-77.080584,18z/data=!4m10!1m2!2m1!1sdirecci%C3%B3n+de+la+pucp!3m6!1s0x9105c912d40840a5:0xd7a0bfb797e5862e!8m2!3d-12.0690919!4d-77.0782022!15sChVkaXJlY2Npw7NuIGRlIGxhIHB1Y3AiAkgBWgYiBHB1Y3CSARJwcml2YXRlX3VuaXZlcnNpdHmaASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVUlhjbUZtYTBoM0VBRaoBQgoJL20vMDY3cDVoEAEqCCIEcHVjcCgOMh8QASIb33lNIzP0sKKmNAtm6ZAiIUl3I09s-dvabFnrMggQAiIEcHVjcOABAPoBBAgAED0!16zL20vMDY3cDVo?entry=ttu&g_ep=EgoyMDI1MTEwNS4wIKXMDSoASAFQAw%3D%3D", name: "Ubicación" },
 ];
 ---
 
 <section id="contacto" class="section section-alt">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Contacto</h2>
-      <p class="section-subtitle">Ponte en contacto con nosotros</p>
+      <h2 class="section-title">¡Sé parte de la innovación!</h2>
+      <p class="section-subtitle"></p>
     </div>
     <div class="contact-content">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <h3>Información de Contacto</h3>
+      <div class="contact-info">
+        <h3>Contáctanos</h3>
+        <div class="contact-grid">
           {contactInfo.map(info => (
             <div class="contact-item">
               <span class="contact-icon">{info.icon}</span>
@@ -44,31 +44,13 @@ const socialLinks = [
               </div>
             </div>
           ))}
-          <div class="social-links">
-            {socialLinks.map(link => (
-              <a href={link.url} class="social-link" aria-label={link.name}>
-                {link.icon}
-              </a>
-            ))}
-          </div>
         </div>
-        <div class="contact-form">
-          <h3>Envíanos un Mensaje</h3>
-          <form id="contactForm">
-            <div class="form-group">
-              <input type="text" id="name" name="name" placeholder="Nombre completo" required>
-            </div>
-            <div class="form-group">
-              <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
-            </div>
-            <div class="form-group">
-              <input type="text" id="subject" name="subject" placeholder="Asunto" required>
-            </div>
-            <div class="form-group">
-              <textarea id="message" name="message" placeholder="Mensaje" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-full">Enviar Mensaje</button>
-          </form>
+        <div class="social-links">
+          {socialLinks.map(link => (
+            <a href={link.url} class="social-link" aria-label={link.name}>
+              {link.icon}
+            </a>
+          ))}
         </div>
       </div>
     </div>
@@ -76,11 +58,20 @@ const socialLinks = [
 </section>
 
 <style>
+  .container {
+    width: 100%;
+    max-width: 1400px; // Aumentamos el ancho máximo
+    margin: 0 auto;
+    padding: 0 4rem; // Aumentamos el padding lateral
+  }
+
   .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-top: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 4rem; // Aumentamos el espacio entre elementos
+    margin-bottom: 2rem;
+    width: 100%; // Aseguramos que use todo el ancho disponible
   }
 
   .contact-info h3 {
@@ -88,16 +79,23 @@ const socialLinks = [
     margin-bottom: 2rem;
   }
 
+  .contact-info {
+    max-width: 100%; // Cambiamos de 600px a 100%
+    margin: 0 auto;
+  }
+
   .contact-item {
     display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    padding: 0 2rem; // Añadimos padding lateral a cada item
   }
 
   .contact-icon {
     font-size: 1.5rem;
-    margin-top: 0.2rem;
+    margin-bottom: 1rem;
   }
 
   .contact-item h4 {
@@ -141,6 +139,10 @@ const socialLinks = [
   .contact-form h3 {
     color: var(--primary-color);
     margin-bottom: 2rem;
+  }
+
+  .contact-form {
+    margin: 2rem 0;
   }
 
   .form-group {
@@ -203,24 +205,24 @@ const socialLinks = [
   }
 
   @media screen and (max-width: 768px) {
+    .container {
+      padding: 0 2rem; // Reducimos el padding en móviles
+    }
+
     .contact-grid {
-      grid-template-columns: 1fr;
-      gap: 3rem;
+      flex-direction: column;
+      gap: 2rem;
     }
 
     .contact-item {
-      flex-direction: column;
-      text-align: center;
-      gap: 0.5rem;
-    }
-
-    .contact-icon {
-      font-size: 2rem;
+      padding: 0; // Eliminamos el padding en móviles
     }
 
     .social-links {
+      display: flex;
       justify-content: center;
-      gap: 0.8rem;
+      gap: 1rem;
+      margin-top: 2rem;
     }
 
     .social-link {
