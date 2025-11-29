@@ -1,27 +1,29 @@
 ---
 const contactInfo = [
   {
-    icon: "📧",
+    icon: "/icons/email-icon.svg", // o usar icono SVG directo
     title: "Email",
-    details: "lithion.racing.pucp@gmail.com"
+    details: "lithion.racing.pucp@gmail.com",
+    url: "mailto:lithion.racing.pucp@gmail.com"
   },
   {
-
-    icon: "📷",
+    icon: "/icons/instagram-icon.svg", 
     title: "Instagram",
-    details: "@lithion.racing"
+    details: "@lithion.racing",
+    url: "https://www.instagram.com/lithion.racing/"
   },
   {
-    icon: "💼",
-    title: "LinkedIn",
-    details: "Lithion Racing"
+    icon: "/icons/linkedin-icon.svg",
+    title: "LinkedIn", 
+    details: "Lithion Racing",
+    url: "https://www.linkedin.com/company/lithion-racing/"
+  },
+  {
+    icon: "/icons/location-icon.svg",
+    title: "Ubicación",
+    details: "Pontificia Universidad Católica del Perú",
+    url: "https://maps.app.goo.gl/...tu-link-acortado..."
   }
-];
-
-const socialLinks = [
-  { icon: "📷", url: "https://www.instagram.com/lithion.racing/", name: "Instagram" },
-  { icon: "💼", url: "https://www.linkedin.com/company/lithion-racing/", name: "LinkedIn" },
-  { icon: "📍", url: "https://www.google.com/maps/place/Pontificia+Universidad+Cat%C3%B3lica+del+Per%C3%BA/@-12.0690919,-77.080584,18z/data=!4m10!1m2!2m1!1sdirecci%C3%B3n+de+la+pucp!3m6!1s0x9105c912d40840a5:0xd7a0bfb797e5862e!8m2!3d-12.0690919!4d-77.0782022!15sChVkaXJlY2Npw7NuIGRlIGxhIHB1Y3AiAkgBWgYiBHB1Y3CSARJwcml2YXRlX3VuaXZlcnNpdHmaASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVUlhjbUZtYTBoM0VBRaoBQgoJL20vMDY3cDVoEAEqCCIEcHVjcCgOMh8QASIb33lNIzP0sKKmNAtm6ZAiIUl3I09s-dvabFnrMggQAiIEcHVjcOABAPoBBAgAED0!16zL20vMDY3cDVo?entry=ttu&g_ep=EgoyMDI1MTEwNS4wIKXMDSoASAFQAw%3D%3D", name: "Ubicación" },
 ];
 ---
 
@@ -29,28 +31,64 @@ const socialLinks = [
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">¡Sé parte de la innovación!</h2>
-      <p class="section-subtitle"></p>
+      <p class="section-subtitle">Conecta con nuestro equipo</p>
     </div>
+    
     <div class="contact-content">
-      <div class="contact-info">
-        <h3>Contáctanos</h3>
-        <div class="contact-grid">
-          {contactInfo.map(info => (
-            <div class="contact-item">
-              <span class="contact-icon">{info.icon}</span>
-              <div>
-                <h4>{info.title}</h4>
-                <p>{info.details}</p>
-              </div>
+      <!-- Tarjetas de contacto principales -->
+      <div class="contact-grid">
+        {contactInfo.map(info => (
+          <a href={info.url} class="contact-card" target={info.title === 'Email' ? '_self' : '_blank'}>
+            <div class="contact-icon">
+              <!-- Opción 1: Usar iconos SVG -->
+              <img src={info.icon} alt={info.title} />
+              <!-- Opción 2: Usar emojis como fallback -->
+              <!-- <span class="icon-fallback">{
+                info.title === 'Email' ? '✉️' :
+                info.title === 'Instagram' ? '📷' :
+                info.title === 'LinkedIn' ? '💼' : '📍'
+              }</span> -->
             </div>
-          ))}
-        </div>
-        <div class="social-links">
-          {socialLinks.map(link => (
-            <a href={link.url} class="social-link" aria-label={link.name}>
-              {link.icon}
-            </a>
-          ))}
+            <div class="contact-text">
+              <h4>{info.title}</h4>
+              <p>{info.details}</p>
+            </div>
+            <div class="contact-arrow">→</div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Redes sociales destacadas -->
+      <div class="social-section">
+        <h3>Síguenos en redes</h3>
+        <div class="social-grid">
+          <a href="https://www.instagram.com/lithion.racing/" class="social-item instagram" target="_blank">
+            <div class="social-icon">
+              <img src="/icons/instagram-colored.svg" alt="Instagram" />
+            </div>
+            <span>Instagram</span>
+          </a>
+          
+          <a href="https://www.linkedin.com/company/lithion-racing/" class="social-item linkedin" target="_blank">
+            <div class="social-icon">
+              <img src="/icons/linkedin-colored.svg" alt="LinkedIn" />
+            </div>
+            <span>LinkedIn</span>
+          </a>
+          
+          <a href="mailto:lithion.racing.pucp@gmail.com" class="social-item email">
+            <div class="social-icon">
+              <img src="/icons/email-colored.svg" alt="Email" />
+            </div>
+            <span>Email</span>
+          </a>
+          
+          <a href="https://maps.app.goo.gl/..." class="social-item location" target="_blank">
+            <div class="social-icon">
+              <img src="/icons/location-colored.svg" alt="Ubicación" />
+            </div>
+            <span>Visítanos</span>
+          </a>
         </div>
       </div>
     </div>
@@ -58,248 +96,202 @@ const socialLinks = [
 </section>
 
 <style>
-  .container {
-    width: 100%;
-    max-width: 1400px; // Aumentamos el ancho máximo
+  .contact-content {
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 0 4rem; // Aumentamos el padding lateral
   }
 
+  /* Grid de contacto principal */
   .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .contact-card {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 4rem; // Aumentamos el espacio entre elementos
-    margin-bottom: 2rem;
-    width: 100%; // Aseguramos que use todo el ancho disponible
-  }
-
-  .contact-info h3 {
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-  }
-
-  .contact-info {
-    max-width: 100%; // Cambiamos de 600px a 100%
-    margin: 0 auto;
-  }
-
-  .contact-item {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
-    flex: 1;
-    padding: 0 2rem; // Añadimos padding lateral a cada item
+    gap: 1.5rem;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    box-shadow: var(--shadow);
+  }
+
+  .contact-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
   }
 
   .contact-icon {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), #034a9a);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
-  .contact-item h4 {
+  .contact-icon img {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1);
+  }
+
+  .icon-fallback {
+    font-size: 1.5rem;
+  }
+
+  .contact-text {
+    flex: 1;
+  }
+
+  .contact-text h4 {
     color: var(--primary-color);
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
   }
 
-  .contact-item p {
-    margin: 0;
+  .contact-text p {
     color: var(--text-light);
-    white-space: pre-line;
+    margin: 0;
+    font-size: 0.95rem;
   }
 
-  .social-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background-color: var(--accent-color);
+  .contact-arrow {
     color: var(--primary-color);
-    text-decoration: none;
-    border-radius: 50%;
-    transition: var(--transition);
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+  }
+
+  .contact-card:hover .contact-arrow {
+    transform: translateX(5px);
+  }
+
+  /* Sección de redes sociales */
+  .social-section {
+    text-align: center;
+  }
+
+  .social-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
     font-size: 1.5rem;
   }
 
-  .social-link:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-3px);
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
   }
 
-  .contact-form h3 {
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-  }
-
-  .contact-form {
-    margin: 2rem 0;
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 1rem;
-    border: 2px solid var(--accent-color);
+  .social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 1.5rem;
+    background: var(--white);
     border-radius: var(--border-radius);
-    font-size: 1rem;
-    transition: var(--transition);
-    font-family: inherit;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(1, 30, 84, 0.1);
-  }
-
-  .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 1rem 2rem;
     text-decoration: none;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    font-size: 1rem;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     border: 2px solid transparent;
-    cursor: pointer;
-    text-align: center;
-    background: none;
-    font-family: inherit;
   }
 
-  .btn-primary {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border-color: var(--primary-color);
+  .social-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
   }
 
-  .btn-primary:hover {
-    background-color: transparent;
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow);
+  .social-item.instagram:hover {
+    border-color: #E4405F;
   }
 
-  .btn-full {
-    width: 100%;
+  .social-item.linkedin:hover {
+    border-color: #0A66C2;
   }
 
+  .social-item.email:hover {
+    border-color: #EA4335;
+  }
+
+  .social-item.location:hover {
+    border-color: #34A853;
+  }
+
+  .social-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-icon img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .social-item span {
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  /* Responsive */
   @media screen and (max-width: 768px) {
-    .container {
-      padding: 0 2rem; // Reducimos el padding en móviles
-    }
-
     .contact-grid {
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .contact-item {
-      padding: 0; // Eliminamos el padding en móviles
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
+      grid-template-columns: 1fr;
       gap: 1rem;
-      margin-top: 2rem;
     }
 
-    .social-link {
-      width: 45px;
-      height: 45px;
-      font-size: 1.3rem;
+    .contact-card {
+      padding: 1.5rem;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+    }
+
+    .contact-icon img {
+      width: 25px;
+      height: 25px;
+    }
+
+    .social-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .social-item {
+      padding: 1.5rem 1rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .social-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .contact-arrow {
+      display: none;
     }
   }
 </style>
-
-<script>
-  // Form handling
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contactForm') as HTMLFormElement | null;
-
-    form?.addEventListener('submit', async function(e) {
-      e.preventDefault();
-
-      const formData = new FormData(form);
-
-      // Show loading state
-      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
-      const originalText = submitButton?.textContent;
-      if (submitButton) {
-        submitButton.textContent = 'Enviando...';
-        submitButton.disabled = true;
-      }
-
-      try {
-        // Simulate API call - replace with real endpoint
-        await new Promise(resolve => setTimeout(resolve, 2000));
-
-        // Show success message
-        showMessage('success', '¡Mensaje enviado correctamente!');
-        form.reset();
-
-      } catch (error) {
-        showMessage('error', 'Error al enviar el mensaje. Inténtelo de nuevo.');
-      } finally {
-        // Reset button state
-        if (submitButton && originalText) {
-          submitButton.textContent = originalText;
-          submitButton.disabled = false;
-        }
-      }
-    });
-  });
-
-  function showMessage(type: string, message: string) {
-    // Remove existing messages
-    const existingMessages = document.querySelectorAll('.success-message, .error-message');
-    existingMessages.forEach(msg => msg.remove());
-
-    // Create new message
-    const messageElement = document.createElement('div');
-    messageElement.className = `${type}-message`;
-    messageElement.textContent = message;
-    messageElement.style.cssText = `
-      background-color: ${type === 'success' ? '#d4edda' : '#f8d7da'};
-      border: 1px solid ${type === 'success' ? '#c3e6cb' : '#f5c6cb'};
-      color: ${type === 'success' ? '#155724' : '#721c24'};
-      padding: 1rem;
-      border-radius: var(--border-radius);
-      margin: 1rem 0;
-      display: block;
-    `;
-
-    // Insert after contact form
-    const contactForm = document.querySelector('#contactForm');
-    if (contactForm?.parentNode) {
-      contactForm.parentNode.insertBefore(messageElement, contactForm.nextSibling);
-
-      // Auto-hide after 5 seconds
-      setTimeout(() => {
-        messageElement.style.opacity = '0';
-        setTimeout(() => messageElement.remove(), 300);
-      }, 5000);
-    }
-  }
-</script>
