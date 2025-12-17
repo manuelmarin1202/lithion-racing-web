@@ -1,94 +1,78 @@
 ---
-const contactInfo = [
+const socialLinks = [
   {
-    icon: "/icons/email-icon.svg", // o usar icono SVG directo
-    title: "Email",
-    details: "lithion.racing.pucp@gmail.com",
-    url: "mailto:lithion.racing.pucp@gmail.com"
+    name: "Instagram",
+    url: "https://www.instagram.com/lithion.racing/",
+    icon: "/icons/instagram-colored.svg",
+    color: "#E4405F"
   },
   {
-    icon: "/icons/instagram-icon.svg", 
-    title: "Instagram",
-    details: "@lithion.racing",
-    url: "https://www.instagram.com/lithion.racing/"
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/company/lithion-racing/",
+    icon: "/icons/linkedin-colored.svg",
+    color: "#0A66C2"
   },
-  {
-    icon: "/icons/linkedin-icon.svg",
-    title: "LinkedIn", 
-    details: "Lithion Racing",
-    url: "https://www.linkedin.com/company/lithion-racing/"
-  },
-  {
-    icon: "/icons/location-icon.svg",
-    title: "Ubicación",
-    details: "Pontificia Universidad Católica del Perú",
-    url: "https://maps.app.goo.gl/...tu-link-acortado..."
-  }
+  // Quitamos el email de aquí para darle su propio protagonismo arriba
 ];
 ---
 
-<section id="contacto" class="section section-alt">
+<section id="contact" class="section section-alt">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">¡Sé parte de la innovación!</h2>
-      <p class="section-subtitle">Conecta con nuestro equipo</p>
+      <p class="section-subtitle">Visítanos en el campus o escríbenos</p>
     </div>
     
-    <div class="contact-content">
-      <!-- Tarjetas de contacto principales -->
-      <div class="contact-grid">
-        {contactInfo.map(info => (
-          <a href={info.url} class="contact-card" target={info.title === 'Email' ? '_self' : '_blank'}>
-            <div class="contact-icon">
-              <!-- Opción 1: Usar iconos SVG -->
-              <img src={info.icon} alt={info.title} />
-              <!-- Opción 2: Usar emojis como fallback -->
-              <!-- <span class="icon-fallback">{
-                info.title === 'Email' ? '✉️' :
-                info.title === 'Instagram' ? '📷' :
-                info.title === 'LinkedIn' ? '💼' : '📍'
-              }</span> -->
+    <div class="contact-wrapper">
+      <div class="contact-info-col">
+        <div class="info-card">
+          <h3>Información de Contacto</h3>
+          <p>Estamos ubicados dentro de la Pontificia Universidad Católica del Perú. Si deseas agendar una visita al taller o conversar sobre patrocinios, contáctanos.</p>
+          
+          <div class="contact-details">
+            <div class="detail-item">
+              <div class="icon-circle">📍</div>
+              <div>
+                <strong>Dirección</strong>
+                <p>Av. Universitaria 1801, San Miguel, Lima (PUCP)</p>
+              </div>
             </div>
-            <div class="contact-text">
-              <h4>{info.title}</h4>
-              <p>{info.details}</p>
+
+            <div class="detail-item">
+              <div class="icon-circle">✉️</div>
+              <div>
+                <strong>Email</strong>
+                <a href="mailto:lithion.racing.pucp@gmail.com" class="email-highlight">
+                  lithion.racing.pucp@gmail.com
+                </a>
+              </div>
             </div>
-            <div class="contact-arrow">→</div>
-          </a>
-        ))}
+          </div>
+
+          <div class="social-links-label">Síguenos en redes:</div>
+          <div class="social-links-row">
+            {socialLinks.map(link => (
+              <a href={link.url} target="_blank" class="social-btn" style={`--hover-color: ${link.color}`}>
+                <img src={link.icon} alt={link.name} class="social-icon-img" /> 
+                <span>{link.name}</span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <!-- Redes sociales destacadas -->
-      <div class="social-section">
-        <h3>Síguenos en redes</h3>
-        <div class="social-grid">
-          <a href="https://www.instagram.com/lithion.racing/" class="social-item instagram" target="_blank">
-            <div class="social-icon">
-              <img src="/icons/instagram-colored.svg" alt="Instagram" />
-            </div>
-            <span>Instagram</span>
-          </a>
-          
-          <a href="https://www.linkedin.com/company/lithion-racing/" class="social-item linkedin" target="_blank">
-            <div class="social-icon">
-              <img src="/icons/linkedin-colored.svg" alt="LinkedIn" />
-            </div>
-            <span>LinkedIn</span>
-          </a>
-          
-          <a href="mailto:lithion.racing.pucp@gmail.com" class="social-item email">
-            <div class="social-icon">
-              <img src="/icons/email-colored.svg" alt="Email" />
-            </div>
-            <span>Email</span>
-          </a>
-          
-          <a href="https://maps.app.goo.gl/..." class="social-item location" target="_blank">
-            <div class="social-icon">
-              <img src="/icons/location-colored.svg" alt="Ubicación" />
-            </div>
-            <span>Visítanos</span>
-          </a>
+      <div class="map-col">
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d579.971394724557!2d-77.0810864141036!3d-12.073289730260688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c90009dcf203%3A0xa506717da838dca!2sCentro%20Tierra!5e0!3m2!1ses-419!2spe!4v1764525209985!5m2!1ses-419!2spe"
+            width="100%"
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación PUCP"
+          ></iframe>
         </div>
       </div>
     </div>
@@ -96,202 +80,168 @@ const contactInfo = [
 </section>
 
 <style>
-  .contact-content {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  /* Grid de contacto principal */
-  .contact-grid {
+  .contact-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 4rem;
+    grid-template-columns: 1fr 1.2fr; /* Mapa un poco más ancho */
+    gap: 2rem;
+    align-items: stretch;
   }
 
-  .contact-card {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 2rem;
+  /* --- Tarjeta de Información --- */
+  .info-card {
     background: var(--white);
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid transparent;
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow);
-  }
-
-  .contact-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .contact-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--primary-color), #034a9a);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .contact-icon img {
-    width: 30px;
-    height: 30px;
-    filter: brightness(0) invert(1);
-  }
-
-  .icon-fallback {
-    font-size: 1.5rem;
-  }
-
-  .contact-text {
-    flex: 1;
-  }
-
-  .contact-text h4 {
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-  }
-
-  .contact-text p {
-    color: var(--text-light);
-    margin: 0;
-    font-size: 0.95rem;
-  }
-
-  .contact-arrow {
-    color: var(--primary-color);
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: transform 0.3s ease;
-  }
-
-  .contact-card:hover .contact-arrow {
-    transform: translateX(5px);
-  }
-
-  /* Sección de redes sociales */
-  .social-section {
-    text-align: center;
-  }
-
-  .social-section h3 {
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-    font-size: 1.5rem;
-  }
-
-  .social-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .social-item {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 2rem 1.5rem;
-    background: var(--white);
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-  }
-
-  .social-item:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .social-item.instagram:hover {
-    border-color: #E4405F;
-  }
-
-  .social-item.linkedin:hover {
-    border-color: #0A66C2;
-  }
-
-  .social-item.email:hover {
-    border-color: #EA4335;
-  }
-
-  .social-item.location:hover {
-    border-color: #34A853;
-  }
-
-  .social-icon {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
     justify-content: center;
   }
 
-  .social-icon img {
-    width: 30px;
-    height: 30px;
+  .info-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
   }
 
-  .social-item span {
+  .info-card > p {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  /* --- Items de detalle (Icono + Texto) --- */
+  .detail-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .icon-circle {
+    font-size: 1.2rem;
+    background: #f1f5f9; /* Gris muy suave */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0; /* Evita que se aplaste */
+  }
+
+  .detail-item strong {
+    display: block;
     color: var(--text-dark);
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .detail-item p {
+    margin: 0;
+    color: var(--text-light);
+  }
+
+  /* --- Estilo del Email (Feedback: Resaltado suave, no subrayado) --- */
+  .email-highlight {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #eef2ff; /* Azul muy pálido */
+    color: var(--primary-color); /* Texto oscuro (azul corporativo) */
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    word-break: break-all; /* Por si el correo es muy largo en móviles */
+  }
+
+  .email-highlight:hover {
+    background-color: #dbeafe; /* Un poco más oscuro al hover */
+    color: #004ecc; /* Azul un poco más brillante */
+  }
+
+  /* --- Redes Sociales --- */
+  .social-links-label {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 0.8rem;
+    margin-top: 1rem;
+  }
+
+  .social-links-row {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--secondary-color);
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+  }
+
+  /* Feedback: Limitar tamaño de iconos */
+  .social-icon-img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain; /* Mantiene la proporción */
+    display: block;
+  }
+
+  .social-btn:hover {
+    background: var(--white);
+    color: var(--hover-color);
+    border-color: var(--hover-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  /* --- Mapa (Feedback: Interactivo) --- */
+  .map-container {
+    height: 100%;
+    min-height: 400px; /* Altura mínima garantizada */
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 4px solid var(--white); /* Marco blanco elegante */
+    background: #e2e8f0; /* Fondo de carga mientras aparece el mapa */
   }
 
   /* Responsive */
-  @media screen and (max-width: 768px) {
-    .contact-grid {
+  @media screen and (max-width: 900px) {
+    .contact-wrapper {
       grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: 2rem;
     }
 
-    .contact-card {
-      padding: 1.5rem;
-      gap: 1rem;
-    }
-
-    .contact-icon {
-      width: 50px;
-      height: 50px;
-    }
-
-    .contact-icon img {
-      width: 25px;
-      height: 25px;
-    }
-
-    .social-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .social-item {
-      padding: 1.5rem 1rem;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .social-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .contact-card {
-      flex-direction: column;
+    .info-card {
+      padding: 2rem;
       text-align: center;
-      gap: 1rem;
     }
 
-    .contact-arrow {
-      display: none;
+    .detail-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .social-links-row {
+      justify-content: center;
+    }
+
+    .map-container {
+      min-height: 350px; /* Un poco más bajo en móvil */
     }
   }
 </style>

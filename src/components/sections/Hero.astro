@@ -2,65 +2,71 @@
 // components/sections/Hero.astro
 ---
 
-<section id="hero" class="hero-video">
-  <!-- Video de fondo -->
-  <div class="video-container">
+<section id="hero">
+  
+  <div class="video-wrapper">
     <video 
       autoplay 
       muted 
       loop 
       playsinline
       class="hero-video"
-      poster="/images/video-poster.jpg"
+      poster="/images/video-poster.png"
     >
-      <source src="/videos/hero-video.mp4" type="video/mp4">
-      <source src="/videos/hero-video.webm" type="video/webm">
-      <!-- Fallback para navegadores que no soportan video -->
+      <source src="/videos/lithion_video.mp4" type="video/mp4"> 
       <div class="video-fallback">
         <img src="/images/hero-fallback.jpg" alt="FSAE Team" />
       </div>
     </video>
-    <!-- Overlay para mejor legibilidad -->
+    
     <div class="video-overlay"></div>
   </div>
 
-  <!-- Contenido sobre el video -->
+  <div class="hero-content">
+     </div>
+
   
-
-  <!-- ✅ FRASE AÑADIDA en esquina inferior izquierda -->
-  <div class="video-quote">
-    "Ingeniería que desafía los límites"
-  </div>
-
-  <!-- Scroll indicator (sin texto "Scroll") -->
   
 </section>
 
 <style>
-  .hero-video {
-    position: relative;
-    height: 100vh;
+  /* 1. EL CONTENEDOR PRINCIPAL (La caja que ocupa espacio en la web) */
+  #hero {
+    position: relative; /* Importante: Mantiene el flujo normal */
     width: 100%;
-    overflow: hidden;
+    height: 100vh;      /* Ocupa toda la pantalla */
+    height: 100dvh;     /* Mejor soporte móvil */
+    overflow: hidden;   /* CORTA lo que sobre del video (el cielo) */
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .video-container {
+  /* 2. EL VIDEO (Lo que se estira y se corta) */
+  .hero-video {
+    position: absolute;
+    bottom: 0;          /* Anclado al suelo para salvar subtítulos */
+    left: 0;
+    width: 100%;
+    
+    /* Altura extra para que sobre por arriba y se corte */
+    height: 120vh;      
+    height: 120dvh;
+    
+    object-fit: cover;
+    object-position: center bottom; /* Prioridad a la parte de abajo */
+    z-index: 0;
+  }
+
+  /* Wrapper para ordenar capas */
+  .video-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
-  }
-
-  .hero-video video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    z-index: 1; /* Detrás del contenido, delante del fondo base */
+    pointer-events: none; /* Permite clicks a través si fuera necesario */
   }
 
   .video-overlay {
@@ -69,124 +75,49 @@
     left: 0;
     width: 100%;
     height: 100%;
+    /* Gradiente sutil para que se lean las letras blancas */
     background: linear-gradient(
-      45deg,
-      rgba(0, 33, 71, 0.7) 0%,
-      rgba(0, 66, 128, 0.5) 50%,
-      rgba(0, 33, 71, 0.3) 100%
+      to bottom,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(0, 0, 0, 0.6) 100%
     );
-    z-index: 2;
+    z-index: 2; /* Encima del video */
   }
 
+  /* 3. CONTENIDO (Texto y botones) */
   .hero-content {
     position: relative;
-    z-index: 3;
+    z-index: 10; /* Encima de todo */
     text-align: center;
     color: white;
     width: 100%;
-    max-width: 1200px;
     padding: 0 20px;
   }
 
-  .hero-title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 800;
-    margin-bottom: 1rem;
-    line-height: 1.1;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  }
-
-  .highlight {
-    color: var(--accent-color, #ff6b35);
-    background: linear-gradient(45deg, #ff6b35, #ff8e53);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-subtitle {
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-    margin-bottom: 2rem;
-    opacity: 0.9;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-  }
-
-  .btn {
-    padding: 12px 32px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid transparent;
-    display: inline-block;
-  }
-
-  .btn-primary {
-    background: var(--primary-color, #0066cc);
-    color: white;
-    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.4);
-    background: #0052a3;
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-  }
-
-  .btn-secondary:hover {
-    background: white;
-    color: var(--primary-color, #0066cc);
-    transform: translateY(-2px);
-  }
-
-  /* ✅ ESTILOS PARA LA FRASE DEL VIDEO */
+  /* Frase esquina */
   .video-quote {
     position: absolute;
     bottom: 30px;
     left: 30px;
-    color: white;
+    color: rgba(255, 255, 255, 0.9);
     font-size: clamp(1rem, 2vw, 1.3rem);
     font-style: italic;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-    z-index: 4;
-    opacity: 0.9;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    z-index: 10;
     max-width: 300px;
-    line-height: 1.4;
-    transition: opacity 0.3s ease;
+    font-weight: 300;
   }
 
-  .video-quote:hover {
-    opacity: 1;
-  }
-
-  /* Scroll indicator (sin texto) */
+  /* Scroll indicator */
   .scroll-indicator {
     position: absolute;
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
-    color: white;
-    text-align: center;
+    z-index: 10;
     opacity: 0.8;
     animation: bounce 2s infinite;
-    z-index: 4;
   }
 
   .arrow {
@@ -210,112 +141,29 @@
   }
 
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateX(-50%) translateY(0);
-    }
-    40% {
-      transform: translateX(-50%) translateY(-10px);
-    }
-    60% {
-      transform: translateX(-50%) translateY(-5px);
-    }
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
   }
 
   /* Responsive */
   @media screen and (max-width: 768px) {
-    .hero-buttons {
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .btn {
-      width: 200px;
-      text-align: center;
-    }
-
-    .hero-video {
-      height: 100vh;
-      min-height: 600px;
-    }
-
-    /* ✅ Ajustes responsive para la frase */
     .video-quote {
       bottom: 20px;
       left: 20px;
       font-size: 0.9rem;
-      max-width: 200px;
     }
-
-    .scroll-indicator {
-      bottom: 20px;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .hero-content {
-      padding: 0 15px;
-    }
-    
-    .hero-title {
-      font-size: 2.2rem;
-    }
-    
-    .scroll-indicator {
-      bottom: 15px;
-    }
-
-    /* ✅ Ajustes para móviles muy pequeños */
-    .video-quote {
-      bottom: 15px;
-      left: 15px;
-      font-size: 0.8rem;
-      max-width: 150px;
-    }
-  }
-
-  /* ✅ Para tablets en orientación horizontal */
-  @media screen and (max-width: 1024px) and (orientation: landscape) {
-    .video-quote {
-      bottom: 20px;
-      left: 20px;
-      font-size: 1rem;
-    }
-  }
-
-  /* ✅ Efectos de carga del video */
-  .hero-video video:not(.loaded) {
-    opacity: 0;
-  }
-
-  .hero-video video.loaded {
-    opacity: 1;
-    transition: opacity 1s ease-in-out;
   }
 </style>
 
 <script>
-  // Optimización del video
+  // Script de carga optimizada (igual que tenías)
   document.addEventListener('DOMContentLoaded', function() {
-    const heroVideo = document.querySelector('.hero-video video') as HTMLVideoElement;
+    const heroVideo = document.querySelector('.hero-video') as HTMLVideoElement;
     if (heroVideo) {
-      // Precargar video
-      heroVideo.preload = 'auto';
-      
-      // Manejar carga del video
       heroVideo.addEventListener('loadeddata', function() {
         this.classList.add('loaded');
       });
-
-      // Pausar video cuando no es visible (opcional, para performance)
-      const videoObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            heroVideo.play();
-          }
-        });
-      }, { threshold: 0.5 });
-
-      videoObserver.observe(heroVideo);
     }
   });
 </script>

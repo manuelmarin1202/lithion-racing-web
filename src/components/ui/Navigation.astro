@@ -6,7 +6,9 @@
   <!-- ✅ QUITAMOS el div container del navbar -->
   <div class="nav-container-full">  <!-- Cambiamos la clase -->
     <div class="nav-logo">
-      <h2>LITHION RACING</h2>
+      <a href="#hero" aria-label="Volver al inicio">
+        <img src="/images/lit.png" alt="Lithion Racing Logo" />
+      </a>
     </div>
     <ul class="nav-menu" id="nav-menu">
       <li class="nav-item">
@@ -64,20 +66,40 @@
     box-sizing: border-box;
   }
 
+  /* Estilos actualizados para el Logo de Imagen */
   .nav-logo {
-    color: var(--white);
     display: flex;
     align-items: center;
-    margin: 0;
     padding: 0;
+    margin: 0;
+    z-index: 1001; /* Asegura que esté por encima si hay superposiciones */
   }
 
-  .nav-logo h2 {
-    color: var(--white);
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  .nav-logo a {
+    display: flex; /* Elimina espacio extra debajo de la imagen */
+    align-items: center;
+  }
+
+  .nav-logo img {
+    height: 55px; /* Altura ideal para navbar. Ajusta si lo ves muy grande/pequeño */
+    width: auto;  /* Mantiene la proporción */
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  /* Efecto hover opcional */
+  .nav-logo img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  /* --- AJUSTES MÓVILES --- */
+  @media screen and (max-width: 768px) {
+    /* ... otros estilos móviles ... */
+
+    .nav-logo img {
+      height: 35px; /* Un poco más pequeño en celulares para no ocupar tanto */
+    }
   }
 
   .nav-menu {
@@ -257,6 +279,8 @@
       });
     });
 
+    
+
     // Active link highlighting based on scroll position
     window.addEventListener('scroll', function() {
       let current = '';
@@ -283,14 +307,25 @@
       });
     });
 
-    // Navbar background change on scroll
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 100) {
-        navbar?.classList.add('scrolled');
+    function updateNavbarStyle() {
+      const heroSection = document.getElementById('hero');
+      if (!navbar || !heroSection) return;
+
+      // Calculamos el punto de cambio: Altura del Hero - Altura del Navbar
+      // Esto hace que se vuelva sólido justo cuando termina el video y empieza el texto blanco.
+      const navbarHeight = navbar.offsetHeight;
+      const triggerPoint = heroSection.offsetHeight - navbarHeight;
+
+      if (window.scrollY > triggerPoint) {
+        navbar.classList.add('scrolled');
       } else {
-        navbar?.classList.remove('scrolled');
+        navbar.classList.remove('scrolled');
       }
-    });
+    }
+
+    // Navbar background change on scroll
+    window.addEventListener('scroll', updateNavbarStyle);
+    updateNavbarStyle();
 
     // Cerrar menú móvil al hacer clic fuera
     document.addEventListener('click', function(event) {

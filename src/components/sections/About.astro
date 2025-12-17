@@ -1,29 +1,37 @@
 ---
 const features = [
   {
-    icon: "⚡",
-    title: "Tecnología Eléctrica",
-    description: "Desarrollamos sistemas de propulsión eléctrica de alta eficiencia y rendimiento para competiciones Formula SAE."
+    icon: "🏎️", // O un icono de chasis/estructura
+    title: "Diseño desde Cero",
+    description: "Aceptamos el reto de crear un monoplaza eléctrico partiendo de una hoja en blanco, donde cada decisión convierte una idea en movimiento."
   },
   {
-    icon: "🏆",
-    title: "Competición",
-    description: "Participamos en las competiciones más prestigiosas de Formula SAE a nivel nacional e internacional."
+    icon: "⚙️", // O icono de engranaje/check
+    title: "Más que Velocidad",
+    description: "En Formula SAE no solo importa correr rápido. Priorizamos el diseño, la confiabilidad y la excelencia técnica en cada componente."
   },
   {
-    icon: "🔧",
-    title: "Ingeniería",
-    description: "Aplicamos conocimientos multidisciplinarios en mecánica, eléctrica, aerodinámica y materiales."
+    icon: "🎓", // O icono de birrete/cerebro
+    title: "Ingenieros del Futuro",
+    description: "Aprendemos a pensar como ingenieros, trabajar en equipo y soñar en grande. Son nuestros primeros pasos hacia la alta competencia."
   }
 ];
 ---
 
-<section id="acerca" class="section">
+<section id="about" class="section">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Acerca de Nosotros</h2>
-      <p class="section-subtitle">Pasión por la ingeniería y la competición</p>
+      <p class="section-subtitle">Innovación, Ingeniería y Trabajo en Equipo</p>
     </div>
+    
+    <div class="about-narrative">
+      <p>
+        Somos <strong>Lithion Racing</strong>, un equipo de estudiantes de la <strong>PUCP</strong> apasionados por la movilidad eléctrica. 
+        Cada año, aceptamos el reto de las fórmulas universitarias: unir innovación y técnica para materializar un vehículo de competencia.
+      </p>
+    </div>
+
     <div class="about-content">
       <div class="about-grid">
         {features.map(feature => (
@@ -39,11 +47,29 @@ const features = [
 </section>
 
 <style>
+  /* Estilos para el nuevo texto narrativo */
+  .about-narrative {
+    max-width: 800px;
+    margin: -2rem auto 3rem; /* Espaciado ajustado */
+    text-align: center;
+  }
+
+  .about-narrative p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark); /* Color más oscuro para que se lea bien */
+  }
+
+  .about-narrative strong {
+    color: var(--primary-color);
+    font-weight: 700;
+  }
+
+  /* Grid y Cards (Mantenemos tu base pero ajustamos detalles) */
   .about-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    margin-top: 3rem;
   }
 
   .about-card {
@@ -53,22 +79,38 @@ const features = [
     text-align: center;
     transition: var(--transition);
     border: 1px solid var(--accent-color);
+    
+    /* Flexbox para alinear mejor el contenido verticalmente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%; 
   }
 
   .about-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
   }
 
   .card-icon {
     font-size: 3rem;
     margin-bottom: 1.5rem;
     display: block;
+    /* Opcional: un fondo suave para el icono */
+    width: 80px;
+    height: 80px;
+    background: #f8fafc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .about-card h3 {
     color: var(--primary-color);
     margin-bottom: 1rem;
+    font-size: 1.25rem;
   }
 
   .about-card p {
@@ -78,6 +120,11 @@ const features = [
   }
 
   @media screen and (max-width: 768px) {
+    .about-narrative {
+      margin-bottom: 2rem;
+      padding: 0 1rem;
+    }
+    
     .about-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
