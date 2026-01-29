@@ -1,49 +1,95 @@
 ---
 const teamMembers = [
   {
-    name: "Team Leader",
-    role: "Líder del Proyecto",
-    description: "Coordina todas las actividades del equipo y gestiona las relaciones con sponsors.",
-    avatar: "👨‍🔧"
+    name: "Samid Villafuerte",
+    role: "Team Leader",
+    image: "/images/team/samid.png", // Asegúrate de que la extensión coincida (png/jpg)
+    linkedin: "https://www.linkedin.com/in/samid-villafuerte/"
   },
   {
-    name: "Powertrain Engineer",
-    role: "Ingeniera de Propulsión",
-    description: "Diseña y optimiza el sistema de propulsión eléctrica del vehículo.",
-    avatar: "👩‍💻"
+    name: "Cesar Romero",
+    role: "Team Captain",
+    image: "/images/team/cesar.jpg",
+    linkedin: "https://www.linkedin.com/in/cesar-romero-zegarra-1aa5a92b5/"
   },
   {
-    name: "Chassis Engineer",
-    role: "Ingeniero de Chasis",
-    description: "Responsable del diseño estructural y la seguridad del vehículo.",
-    avatar: "👨‍🔬"
+    name: "Miryam Mateo",
+    role: "Business Director",
+    image: "/images/team/miryam.jpg", // Si no tienes foto aún, el CSS mostrará un color de fondo
+    linkedin: "https://www.linkedin.com/in/miryam-cosette-mateo-espinal-5a5438227/"
   },
   {
-    name: "Aerodynamics Engineer",
-    role: "Ingeniera Aerodinámica",
-    description: "Optimiza el flujo de aire y la eficiencia aerodinámica del vehículo.",
-    avatar: "👩‍🎨"
+    name: "Manuel Pallete",
+    role: "Software Director",
+    image: "/images/team/manuel.jpeg",
+    linkedin: "https://www.linkedin.com/in/manuel-pallete/"
+  },
+  {
+    name: "Alvaro Carrasco",
+    role: "Electrical Director",
+    image: "/images/team/alvaro.png",
+    linkedin: "#"
+  },
+  {
+    name: "Xiomara Choque",
+    role: "Mechanical Director",
+    image: "/images/team/xiomara.jpeg",
+    linkedin: "#"
+  },
+  {
+    name: "Andrea Shocush",
+    role: "Operations Director",
+    image: "/images/team/andrea.jpg",
+    linkedin: "https://www.linkedin.com/in/andrea-shocush-soto-9571182b1/"
+  },
+  {
+    name: "Ana Valeria",
+    role: "Marketing Director",
+    image: "/images/team/ana.png",
+    linkedin: "https://www.linkedin.com/in/anavaleriamorenosánchez/"
+  },
+  {
+    name: "Nayeli Muñoz",
+    role: "Human Resources",
+    image: "/images/team/nayeli.jpg", // Nota: en tu imagen dice .HEIC, conviértela a JPG o PNG para web
+    linkedin: "#"
   }
 ];
 ---
 
-<section id="equipo" class="section section-alt">
+<section id="team" class="section section-alt">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Nuestro Equipo</h2>
-      <p class="section-subtitle">Estudiantes apasionados por la innovación</p>
+      <h2 class="section-title">Nuestro Liderazgo</h2>
+      <p class="section-subtitle">Las mentes detrás de la innovación en Lithion Racing</p>
     </div>
-    <div class="team-content">
-      <div class="team-grid">
-        {teamMembers.map(member => (
-          <div class="team-card">
-            <div class="member-photo">{member.avatar}</div>
+    
+    <div class="team-grid">
+      {teamMembers.map(member => (
+        <div class="team-card">
+          <div class="image-wrapper">
+            <img 
+              src={member.image} 
+              alt={member.name} 
+              class="member-photo"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            
+          </div>
+          
+          <div class="card-content">
             <h3>{member.name}</h3>
             <p class="member-role">{member.role}</p>
-            <p class="member-description">{member.description}</p>
+            
+            <a href={member.linkedin} target="_blank" rel="noopener noreferrer" class="social-link" aria-label={`LinkedIn de ${member.name}`}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -51,76 +97,102 @@ const teamMembers = [
 <style>
   .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Ajuste para que entren más tarjetas por fila en pantallas grandes */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
     gap: 2rem;
     margin-top: 3rem;
   }
 
   .team-card {
     background: var(--white);
-    padding: 2.5rem 2rem;
     border-radius: var(--border-radius);
     text-align: center;
     transition: var(--transition);
-    border: 1px solid var(--accent-color);
+    border: 1px solid rgba(0,0,0,0.05);
+    overflow: hidden; /* Para que la imagen no se salga */
+    position: relative;
+    padding-bottom: 2rem;
   }
 
   .team-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
+    border-color: var(--accent-color);
+  }
+
+  /* Contenedor de la imagen */
+  .image-wrapper {
+    width: 120px;
+    height: 120px;
+    margin: 2rem auto 1rem;
+    position: relative;
   }
 
   .member-photo {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--primary-color), #034a9a);
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    color: var(--white);
-    font-size: 2rem;
-    transition: var(--transition);
+    object-fit: cover; /* IMPORTANTE: Evita que las fotos se deformen */
+    border: 3px solid var(--secondary-color);
+    box-shadow: var(--shadow);
   }
 
-  .team-card:hover .member-photo {
-    transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(1, 30, 84, 0.2);
+  /* Fallback por si falla la imagen (Círculo con inicial) */
+  .member-fallback {
+    display: none; /* Oculto por defecto */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), #034a9a);
+    color: white;
+    font-size: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
   }
 
   .team-card h3 {
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+    font-size: 1.1rem;
   }
 
   .member-role {
-    color: var(--primary-color);
-    font-weight: 600;
-    margin-bottom: 1rem;
+    color: var(--text-light);
     font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
   }
 
-  .member-description {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--text-light);
+  /* Botón de LinkedIn discreto */
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #f1f5f9;
+    color: #0077b5; /* Color oficial de LinkedIn */
+    transition: all 0.2s ease;
+  }
+
+  .social-link:hover {
+    background-color: #0077b5;
+    color: white;
+    transform: scale(1.1);
   }
 
   @media screen and (max-width: 768px) {
     .team-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+      gap: 1rem;
     }
+  }
 
-    .team-card {
-      padding: 2rem 1.5rem;
-    }
-
-    .member-photo {
-      width: 70px;
-      height: 70px;
-      font-size: 1.8rem;
+  @media screen and (max-width: 480px) {
+    .team-grid {
+      grid-template-columns: 1fr; /* 1 columna en móvil */
     }
   }
 </style>
